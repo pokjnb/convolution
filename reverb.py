@@ -99,7 +99,8 @@ def fdl(x, h):
     out = roll_zero(out, L)
   for i in range(1, num_ir_blocks): #process remaining frequency blocks
     out += np.fft.ifft(fdl[:2*L]).real[:2*L-1]
-    output[num_sig_blocks+i*L: num_sig_blocks+(i+1)*L] += out[:L]
+#     output[num_sig_blocks+i*L: num_sig_blocks+(i+1)*L] += out[:L]
+    output[(num_sig_blocks+i)*L: (num_sig_blocks+(i+1))*L] += out[:L] # fix bug
     out = roll_zero(out, L)
     fdl = roll_zero(fdl, 2*L)
   x_zp = zero_pad(x, p-1)
